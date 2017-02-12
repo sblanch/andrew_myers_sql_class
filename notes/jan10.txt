@@ -1,0 +1,23 @@
+No Homework On Stored Procedures
+
+-- Creating a Stored Procedure
+
+It's like a method, where you can pass in as many variables as you want to. 
+
+Only difference is that you can also have a bunch of results come back into you.
+
+-- The syntax -- 
+
+CREATE PROCEDURE ProcedureName
+	@UserID Int,
+	@UserID Int,
+AS
+BEGIN
+	-- Do Stuff in here
+
+	SELECT * from [User] WHERE UserID = @UserID
+	SELECT * FROM [Weapon] WHERE WeaponID = @UserID
+END 
+GO
+
+EXEC MyProcedure @User10 = 10, @WeaponID = 11

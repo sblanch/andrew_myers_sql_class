@@ -1,0 +1,101 @@
+Lesson 14 Cases
+
+----Divisable By %
+
+----IF - ELSE IF -ELSE
+----CASE WHEN THEN ELSE
+----EXISTS
+----CHARINDEX('LOOKFOR', VALUE)
+----SUBSTRING(VALUE, INDEX, COUNT)
+----LEN(VALUE)
+
+DECLARE @A INT
+SET @A = 100
+
+IF(@A = 100)
+BEGIN
+    IF(@A = 0)
+    BEGIN
+        SELECT * FROM [User]
+    END
+END
+
+IF EXISTS (SELECT TOP 1 UserID FROM [User] WHERE USERID = 1)
+
+IF NOT EXISTS (SELECT TOP 1 UserID FROM [User] WHERE USERID = 1)
+
+
+WHILE(@A > 0)
+BEGIN
+    SET @A = @A - 1
+    PRINT(@A)
+END
+-- There are no for loops
+
+Lesson 15 Try Catches
+
+BEGIN TRY
+    {sql_statement | statement_block}
+END TRY
+
+BEGIN CATCH
+    [{sql_statement | statement_block}]
+END CATCH
+
+
+Sometimes an insert can throw an exception. Constraint Exception can happen here. 
+
+You don't want the program to crash, so instead have exception happen to you
+
+What if you have a whole long list of stuff, and all of a sudden one of them bombs. 
+That is when your transaction comes in handy
+
+--Transaction sytax
+
+BEGIN TRY
+    BEGIN TRANSACTION 
+        -- Do Transaction here
+    COMMIT
+END TRY
+BEING CATCH
+
+    ROLLBACK 
+
+    DECLARE @ERROR VARCHAR(2000)
+
+    SELECT
+        ERROR_NUMBER() AS ErrorNumber,
+        ERRORSEVERITY() AS ERRORSEVERITY,
+        ERROR_STATE() AS ErrorState,
+        ...
+END CATCH
+
+
+BEGIN TRY
+    BEGIN TRANSACTION TransactionName
+        -- Do Transaction here
+    COMMIT TRANSACTION TransactionName
+END TRY
+BEING CATCH
+
+    ROLLBACK TRANSACTION TransactionName
+
+    DECLARE @ERROR VARCHAR(2000)
+
+    SELECT
+        ERROR_NUMBER() AS ErrorNumber,
+        ERRORSEVERITY() AS ERRORSEVERITY,
+        ERROR_STATE() AS ErrorState,
+        ...
+END CATCH
+
+You can give Transaction a name. That way you can roll it back without rolling back other transactions. Able to create a scope for the transactions. 
+
+If you begin a transaction but you don't end it, you can cause lots of problems on your database. 
+
+Don't forget the COMMIT, or it will cause bad stuff. The database can lock up.
+
+@@IDENTITY grabs the last identity made. 
+
+He doesn't use @@Identity in production, because if you have two inserts at the same time, it is possible
+that he may grab the other identity

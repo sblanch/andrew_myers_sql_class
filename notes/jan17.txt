@@ -1,0 +1,70 @@
+Views
+================
+View is like stored procedure, but only uses select statement.
+So 1 select statement, and 1 return. But you can treat it like a table
+
+He doesn't use views very often.
+
+Reason to use views, you can limit another person's access to input stuff.
+
+Database Diagram
+=================
+
+In Microsoft SQL Management Studio,
+
+you can swee how all of the tables are mapped to other tables. 
+
+Database Triggers
+=================
+
+Put a trigger, so when a row is created, then you have a trigger
+fire off to run something else. 
+
+He doesn't code database triggers. He does all of his event driver stuff
+on the server side, c#, wcf, webapp, services. 
+
+Those developers who use triggers, it is hard to debug.
+
+Assemblies
+=================
+
+You can create a dll, with c# methods, then you can 
+call those methods and return back a data set. 
+
+You can have stored procedure call an assembly, which then calls a service.
+He has only done a once. He says it is a pain to do. You have to deal with
+versioning (nightmare). It's also very difficult to debug. 
+
+Synonyms/Service Broker/Storage
+=================
+
+He doesn't know. If you figure these out you will know more than him.
+
+Types/Rules/Defaults/Plan Guides
+=================
+
+He doesn't know. He's never seen a developer use them.
+
+Security
+=================
+
+He doesn't cover this in class. That would be a separate class altogether, because
+that is also a more DBA Class
+
+Server Objects/Replication/Management
+=================
+More DBA Stuff. He doesn't know. 
+
+Pagination
+=================
+
+Based on results, and sort those results
+
+Searching
+
+WITH
+=================
+Can create code snippet and run it.
+
+He is opposed to it. 
+

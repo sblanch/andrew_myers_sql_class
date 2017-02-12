@@ -1,0 +1,256 @@
+CASE INSENSTIVE COLUMNS
+========================
+TSQl Columns are case insensitive. The Select statement columns
+mimics the case use in the select statment.
+
+ALIAS
+========================
+A nickname.
+As AS isn't needed. You can just put the new name
+
+ie
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  (LastName + ',' + FirstName)  Name,
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay,
+  ActiveBit AS OfficerIsEmployed,
+  UW.UserId
+FROM [USER] AS U
+INNER JOIN [UserToWeapon] AS UW
+  ON U.UserId = UW.UserId
+ORDER BY LastName DESC, FirstName ASC
+
+ie
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  Name = (LastName + ',' + FirstName),
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay,
+  ActiveBit AS OfficerIsEmployed,
+  UW.UserId
+FROM [USER] AS U
+INNER JOIN [UserToWeapon] AS UW
+  ON U.UserId = UW.UserId
+ORDER BY LastName DESC, FirstName ASC
+
+
+Keyword - AS
+========================
+Used in Aliasing
+
+ie
+SELECT
+  UserID,
+  (LastName + ',' + FirstName) AS Name
+FROM [User]
+WHERE [UserId] IN (100, 200, 300)
+
+
+ie
+SELECT
+  UserID,
+  (LastName + ',' + FirstName) AS [Full Name]
+FROM [User]
+WHERE [UserId] IN (100, 200, 300)
+
+ie
+-- Alias for column
+SELECT
+  UserID,
+  (LastName + ',' + FirstName) AS 'Full Name'
+FROM [User]
+WHERE [UserId] IN (100, 200, 300)
+
+
+ie
+--You can create a dynamic columnxw
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  (LastName + ',' + FirstName) As Name,
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay
+FROM [USER]
+WHERE [USERID] IN (100, 200, 300)
+
+
+ie
+-- Alias for Table
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  (LastName + ',' + FirstName) As Name,
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay
+FROM [USER] AS U
+WHERE [USERID] IN (100, 200, 300)
+
+ie
+-- Alias join table
+-- The Alias in the Select comes from the 'FROM'
+-- The definition for the Table Alias is defined in the 'FROM'
+-- and can be used in the Select Statement. The Select Statement
+-- fires after the 'From'
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  (LastName + ',' + FirstName) As Name,
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay,
+  ActiveBit AS OfficerIsEmployed,
+  UW.UserId
+FROM [USER] AS U
+INNER JOIN [UserToWeapon] AS UW
+  ON U.UserId = UW.UserId
+WHERE U.[USERID] IN (100, 200, 300)
+
+
+Keyword - ORDER BY
+=========================
+
+Is what is used to Order By a Column
+Default is Ascending
+ie
+-- DESCENDING
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  (LastName + ',' + FirstName) As Name,
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay,
+  ActiveBit AS OfficerIsEmployed,
+  UW.UserId
+FROM [USER] AS U
+INNER JOIN [UserToWeapon] AS UW
+  ON U.UserId = UW.UserId
+ORDER BY LastName DESC
+
+ie
+-- ASCENDING
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  (LastName + ',' + FirstName) As Name,
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay,
+  ActiveBit AS OfficerIsEmployed,
+  UW.UserId
+FROM [USER] AS U
+INNER JOIN [UserToWeapon] AS UW
+  ON U.UserId = UW.UserId
+ORDER BY LastName ASC
+
+is
+-- Multiple Order By
+
+SELECT
+  (SELECT TOP 1 WeaponID from Weapon WHERE WEAPONID = 100) AS Blah,
+  (LastName + ',' + FirstName) As Name,
+  GetUtcDate() AS UTCDate,
+  'Happy Day' AS HappyDay,
+  ActiveBit AS OfficerIsEmployed,
+  UW.UserId
+FROM [USER] AS U
+INNER JOIN [UserToWeapon] AS UW
+  ON U.UserId = UW.UserId
+ORDER BY LastName DESC, FirstName ASC
+
+
+Keyword - DESC
+=========================
+Descending, is used by 'ORDER BY'
+
+
+Keyword - ASC
+=========================
+Ascending, is used by 'ORDER BY'
+
+Keyword - UNION
+=========================
+
+ie
+-- Two Select Statements that we want combined together,
+-- It doesn't allow duplicates
+-- Combines into play with cross database usage
+-- He doesn't use it often, but there are times that
+-- he uses it to make things easier
+-- 90% of the time you can use joins are where clause
+
+SELECT
+  UserID,
+  FirstName,
+  LastName
+FROM [User]
+WHERE UserID > 100 AND UserID < 200;
+
+UNION
+
+SELECT
+  UserID,
+  FirstName,
+  LastName
+FROM [User]
+WHERE UserID > 300 AND UserID < 500;
+
+Keyword - UNION ALL
+==========================
+Like Union, but allows for duplicates
+
+Keyword - CROSS JOIN
+==========================
+Every row pairs up with every other row in the other table.
+Only use he has seen is to create fake data.
+Rarely ever going to see it.
+
+Keyword -  FULL JOIN
+=========================
+Joins all the table, no matter with it matches or not
+
+ie
+SELECT
+  *
+FROM
+  A FULL JOIN B
+ON A.AID = B.AID
+
+You have to have ON. That is because without the ON
+the table won't know what columns to match on to combine the rows.
+If there isn't a match, the other table's columns are null.
+
+They use a FULL JOIN to reconcile their tables. This will let them
+debug their tables and see if there are issues.
+
+He doesn't use Full Joins very often.
+
+Keyword - INNER JOIN
+==========================
+Is a FULL JOIN, but without columns that are null.
+
+Keyword - LEFT JOIN
+==========================
+Is like Full Join, but only with view of Left Table. You return
+all data on the left table, including everything that matches.
+
+
+To turn a left join into an inner join
+
+
+SELECT
+  *
+FROM
+  A LEFT JOIN B
+  ON A.ID = B.ID
+WHERE
+  B.AID IS NOT NULL
+
+He has heard that this is faster than an inner join. He hasn't
+been able to prove it, since he has never run into a database
+big enough.
+
+Keyword - RIGHT JOIN
+==========================
+Is like Full Join, but only with view of Right Table. You return
+all data on the left table, including everything that matches.
+
+
+
+
+
+
+

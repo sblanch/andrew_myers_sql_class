@@ -1,0 +1,6 @@
+If you have to sort, use primary key over nonclustered index
+
+Clustered Index, like phone book
+Nonclustered Index, like looking up page at back of book in the index section.
+
+Reduce your instruction set first and then sort. Sorting takes up a lot!

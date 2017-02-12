@@ -1,0 +1,124 @@
+Control + R
+==============
+Toggle select output
+
+Types of Tables
+===============
+
+-Lookup Table,
+just key value pair, rarely changes
+1 | gun
+2 | knife
+3 | taser
+
+names of weapons is an example
+
+-Flat Table,
+has redundancy, but is quicker. Problem is it can get bigger.
+Does prevent joins though.
+
+-Mapping Table
+One to many, or many to many
+One officer can have many weapons
+
+UserID | WeaponID
+
+Primary key, identifier for that row in a table
+foreign key, is a primary key for a different table
+
+In select, displaying the detail in SSMS takes the longest. He said 10 times as long!
+That is why SSMS has select first 1000.
+
+Operators
+=================
+
+The <> vs !=
+The != is faster from what he has tried.
+
+SELECT * FROM User vs SELECT * from [User]
+User is a keyword. With brackets it makes it no longer the keyword.
+
+Schemas
+================
+
+A schema groups tables together. 
+You can have multiple schemas.
+[ServerName].[Database].[schema].[table]
+
+If you can get everything into the same database server, that is way faster
+than having databases across different servers
+
+Master Table
+================
+Database that holds information for the database
+Don't delete!
+
+Keywords - Use
+================
+Use [database_name]
+Command on the top to use the specific database.
+This is good practice
+
+Keywords - TOP
+================
+TOP
+Top 10, gets first Top 10
+Top goes off from the primary key
+ie. SELECT Top 10 * from [User]
+
+Keywords - SELECT
+=================
+If you need to grab something, use Select
+
+Keywords - DISTINCT
+====================
+Makes it so there isn't any repeated rows
+
+ie 
+SELECT DISTINCT
+	[LastName]
+	, [FirstName]
+FROM [User]
+
+Keywords - --
+====================
+Comment the rest of the line
+
+Keywords - WHERE
+====================
+Where is to filter
+
+ie
+SELECT *
+FROM [User]
+WHERE
+	FirstName = 'Henry' OR
+	FirstName = 'Tracey'
+
+
+Keywords - LIKE
+===================
+% _ ^ []
+
+Keywords - BETWEEN
+===================
+
+Keywords - OPERATORS
+===================
+>
+=
+LIKE
+IS NULL
+IS NOT NULL
+<>
+!=
+
+Keywords - IN
+===================
+
+
+
+
+
+
+

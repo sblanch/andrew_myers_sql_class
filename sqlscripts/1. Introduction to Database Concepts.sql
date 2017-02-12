@@ -1,0 +1,22 @@
+--DROP DATABASE
+--CREATE DATABASE
+--USE [DatabaseName]
+--CREATE TABLE
+--DATA TYPES (for example INT, VARCHAR, DATE, ETC)
+--PRIMARY KEY
+--FOREIGN KEY
+--IDENTITY
+--TABLE CONSTRAINTS
+--       NULL
+--       NOT NULL
+--       UNIQUE
+--       FOREIGN KEY
+--TABLE
+--DEFAULT
+--ON DELETE
+--ON UPDATE 
+--ASCII TABLE
+--Difference between NULL and empty string
+--TYPES OF TABLES
+--      LOOKUP
+--      MAPPING

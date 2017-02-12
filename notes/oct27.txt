@@ -1,0 +1,121 @@
+-----------------------
+-- Aggregated Functions
+-- Count()
+-- Avg()
+-- Max()
+-- Min()
+-- CASE
+-- WHEN THEN
+-- ELSE
+-- END
+-----------------------
+
+Cluster Index vs Non Clustered Index
+-------------------------------------
+Primary Key by default is a cluster index. You can change it so it
+isn't, but kinda weird to do
+
+Cluster Index, phone book, gives you the info right there
+Non clustered, index in the back of a book, tells you what page it is on
+but computer still has to read that page.
+
+ie find social security number, last name clustered index, but other fields
+you would have as non clustered index
+
+DBAs do the analysis to determine which columns to be clustered index.
+
+
+Keyword - Count()
+-------------------
+
+ie
+SELECT
+COUNT(U.UserID) As NumOfUsers
+FROM [User] u
+
+ie
+SELECT
+U.UserID,
+COUNT(Q.QualID) AS NumOfPasses
+FROM [User] U
+INNER JOIN USERTOQUAL UQ ON U.UserID = UQ.UserID
+INNER JOIN Qual Q on Q.QualID = UQ.QualID
+WHERE Q.Pass = 1
+GROUP BY U.UserID
+
+ie
+SELECT
+U.UserID,
+AVG(Q.Score) AS AverageScore
+FROM [User] U
+INNER JOIN USERTOQUAL UQ ON U.UserID = UQ.UserID
+INNER JOIN Qual Q on Q.QualID = UQ.QualID
+WHERE Q.Pass = 1
+GROUP BY U.UserID
+
+ie
+SELECT
+U.UserID,
+COUNT(Q.QualID) AS NumOfPasses,
+AVG(Q.Score) AS AverageScore
+FROM [User] U
+INNER JOIN USERTOQUAL UQ ON U.UserID = UQ.UserID
+INNER JOIN Qual Q on Q.QualID = UQ.QualID
+WHERE Q.Pass = 1
+GROUP BY U.UserID
+
+ie
+SELECT
+U.UserID,
+COUNT(Q.QualID) AS NumOfPasses,
+AVG(Q.Score) AS AverageScore
+FROM [User] U
+INNER JOIN USERTOQUAL UQ ON U.UserID = UQ.UserID
+INNER JOIN Qual Q on Q.QualID = UQ.QualID
+WHERE Q.Pass = 1
+GROUP BY U.UserID
+ORDER BY NumOfPasses
+
+-- can't put the alias in the where clause, but can everywhere else
+
+-- give user that have passed at least 3 qualifications test
+-- that will be for a next lesson
+
+
+
+Keyword - Avg()
+--------------------
+Like count but does average
+
+Keyword - Max()
+--------------------
+Like count but does max
+
+Keyword - Min()
+--------------------
+Like count but does min
+
+Keyword - Sum()
+--------------------
+Like count but does sum
+
+Keyword - CASE, WHEN THE, ELSE, END
+-------------------------
+Formats the values
+
+ie
+SELECT TOP 20
+  U.UserID,
+  CASE
+    WHEN U.ActiveBit = 0 THEN 'NO'
+    ELSE 'YES'
+  END
+  U.ActiveBit AS IsEmployed
+FROM [User] U
+
+
+
+
+
+
+

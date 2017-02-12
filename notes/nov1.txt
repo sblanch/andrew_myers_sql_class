@@ -1,0 +1,50 @@
+Key Word -- Case (Again)
+========================================
+You can nest case statements
+
+
+ie
+SELECT
+ CASE 
+ 	WHEN (U.UserID % 7) = 0 THEN 'Happy'
+ 	WHEN (U.UserID % 5) = 0 THEN 'Sad'
+ 	WHEN (U.UserID % 3) = 0 THEN 'Depressed'
+ 	ELSE 'Content'
+ END AS [OCD]
+FROM [User] U
+WHERE U.UserID < 2000
+
+ie
+SELECT
+ CASE 
+ 	WHEN (U.UserID % 7) = 0 THEN 'Happy'
+ 	WHEN (U.UserID % 5) = 0 THEN 'Sad'
+ 	WHEN (U.UserID % 3) = 0 THEN 'Depressed'
+ 	ELSE 
+ 		CASE
+ 			WHEN (U.UserID % 11) = 0 THEN 'VERY HAPPY'
+ 			ELSE 'Content'
+ 		END
+	END AS [OCD]
+FROM [User] U
+WHERE U.UserID < 2000
+
+ie
+SELECT
+ CASE 
+ 	WHEN (U.UserID % 7) = 0 
+ 		THEN 
+ 			CASE
+ 				WHEN (U.UserID % 11) = 0 THEN 'Ecstatic'
+ 				ELSE 'HAPPY'
+ 			END
+ 	WHEN (U.UserID % 5) = 0 THEN 'Sad'
+ 	WHEN (U.UserID % 3) = 0 THEN 'Depressed'
+ 	ELSE 
+ 		CASE
+ 			WHEN (U.UserID % 11) = 0 THEN 'VERY HAPPY'
+ 			ELSE 'Content'
+ 		END
+	END AS [OCD]
+FROM [User] U
+WHERE U.UserID < 2000

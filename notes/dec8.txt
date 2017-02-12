@@ -1,0 +1,64 @@
+
+/*
+COVER
+
+DECLARE @VAR
+SET
+CONCATINATION
+
+CONVERT(TYPE, VALUE)
+CAST(VALUE AS TYPE)
+
+SUBSTRING(VALUE,INDEX,COUNT)
+LEN(VALUE)
+REPLACE (VALUE, 'LOOK_FOR' , 'REPLACE_WITH')
+CHARINDEX('LOOK_FOR', VALUE, (OPTIONAL) START_INDEX_LOCATION )  
+*/
+
+
+-- Declare
+-- Set
+DECLARE @Age INT, @Height INT
+
+Set @Age = 120
+Set @Height = 70
+
+
+/*
+Two ways to display, select as well as print
+The select display it to the Results
+The print displays it to the Messages
+*/
+
+SELECT @AGE
+Print('My age is ' + cast(@Age as varchar(20)))
+
+-- Already went over Concatenation in previous lesson
+-- Already went over Convert in previous lesson
+-- Already went over Cast in previous lesson
+
+-- Substring
+Declare @Blah VARCHAR(100)
+SET @Blah = 'How are you doing today'
+SELECT SUBSTRING(@Blah, 9, 3) as [Me]
+
+Declare @Blah VARCHAR(100)
+SET @Blah = 'How are you doing today'
+SELECT SUBSTRING(@Blah, 9, LEN(@Blah)) as [Me]
+
+-- You can go over the max. That is why length works
+
+Declare @Blah VARCHAR(100) = 'How are you doing today'
+SELECT REPLACE(@Blah, 'are you', 'is Scott')
+
+-- CHARINDEX
+
+Declare 
+	@Index INT,
+	@Blah VARCHAR(100) = 'How are you doing today'
+
+SET @Index = CHARINDEX('you', @Blah)
+
+Select @Index
+
+

@@ -1,0 +1,45 @@
+Coalesce, have list of parameters and uses whatever first in list is not null.
+ISNULL, is like Coalesce but only uses 2 parameters
+
+=========================
+
+Stored Procedures. They can output more than one thing. 
+
+
+=========================
+
+Views are like dummy stored procedure
+
+Views are also like temp tables, but you have
+to use only nested select statements
+
+Views are made for basic stuff
+
+There is a difference between an index view and a view.
+Index views are preindexed, so they are faster.
+Look it up on your own time for more information.
+
+=========================
+
+Functions are just like methods in c#. You can pass in as
+many inputs as you want, but can only return 1 output.
+
+Function are supposed to be common stuff used in stored procedures. 
+Example: json parser, xml parser, aggregate functions(avg, count) (He likes json better, lol)
+
+ORMs
+========
+
+Andrew Meyer's opinion...
+
+Good points,
+Small shop, good because it does it all for you
+
+Bad stuff,
+When things become complex, managing the ORMS becomes a nightmare. 
+Going to raw queries becomes way better
+Is also about 6 to 32 times slower than using ADO.net
+Even those that are proficient at ORM agree that it is slower.
+It is slower because it is built on top of ADO.net
+
+He goes raw ADO.net. It is the fastest thing in this scenario.

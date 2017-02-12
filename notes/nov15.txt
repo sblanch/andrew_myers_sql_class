@@ -1,0 +1,134 @@
+Temp Tables
+========================
+DECLARE @MyTable TABLE
+(
+	Name VARCHAR(50),
+	ID INT
+)
+
+CREATE TABLE #MyTable
+(
+	Name VARCHAR(50),
+	ID INT
+)
+
+INSERT INTO @MyTable/#MyTable
+SELECT....
+
+Inline Tables
+=======================
+
+SELECT *
+FROM 
+(
+	SELECT
+		U.UserID,
+		U.FirstName,
+		U.LastName
+	FROM [User] U
+) AS UU
+WHERE UU.UserID > 100 AND UU.UserID < 1000
+
+Inline Queries Need to be Named.
+
+
+-- Get the average scores of all the users
+-- Return rows 100 to 200
+
+-- one way to do it
+DECLARE @AvgScore TABLE
+(
+	ID INT IDENTITY(0,1),
+	UserID INT,
+	AvgScore INT
+)
+INSERT INTO @AvgScore
+SELECT 
+	U.UserID,
+	AVG(Q.Score) AS [AvgCount]
+From [User] U
+INNER JOIN [UserToQual] UQ ON U.UserID = UQ.UserID
+INNER JOIN [Qual] Q ON Q.QualID = UQ.QualID
+GROUP BY U.UserID
+
+
+SELECT * FROM @AvgScores
+WHERE ID > 100 AND ID <=200
+
+
+-- another way to do it
+
+SELECT
+	*
+FROM
+(
+SELECT
+	U.UserID,
+	AVG(Q.Score) AS AvgCount,
+	ROW_NUMBER() OVER(ORDER BY U.UserID ASC) AS RowID
+From [User] U
+INNER JOIN [UserToQual] UQ ON U.UserID = UQ.UserID
+INNER JOIN [Qual] Q ON Q.QualID = UQ.QualID
+Group By U.UserID
+) AS UAS
+WHERE RowID > 100 AND RowID <= 200
+
+-- Get the average scores of all the users
+-- Return rows 100 to 200
+-- And return the total row count (not just 100 to 200)
+
+DECLARE @AvgScore TABLE
+(
+	ID INT IDENTITY(0,1),
+	UserID INT,
+	AvgScore INT
+)
+INSERT INTO @AvgScore
+SELECT 
+	U.UserID,
+	AVG(Q.Score) AS [AvgCount]
+From [User] U
+INNER JOIN [UserToQual] UQ ON U.UserID = UQ.UserID
+INNER JOIN [Qual] Q ON Q.QualID = UQ.QualID
+GROUP BY U.UserID
+
+
+SELECT * FROM @AvgScore
+WHERE ID > 100 AND ID <=200
+
+SELECT COUNT(*) FROM @AvgScore
+
+
+
+
+Execution Plan
+======================
+Way to see who is using how of the computer's resources.
+
+
+CTE
+===========
+Common Table Expression
+
+WITH MyCTE(UserID, AvgCount, RowID)
+AS 
+(
+	SELECT
+		U.UserID,
+		AVG(Q.Score) As AvgCount,
+		ROw_NUMBER() Over(ORDER BY U.UserID ASC) AS RowID
+	FROM [User] U
+	INNER JOIN [UserToQual] UQ on U.UserID = UQ.UserID
+	INNER JOIN [Qual] Q ON Q.QualID = UQ.UqalID
+	GROUP BY U.UserID
+
+)
+
+SELECT
+	*
+FROM
+	MyCTE AS UAS
+WHERE RowID > 100 AND RowID <= 200
+
+There must be a semicolon before the With if there is a query before it. 
+That is just the way Microsoft made it. 

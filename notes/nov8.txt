@@ -1,0 +1,128 @@
+Concept - Temp Tables!
+========================
+
+Two types of temp tables
+1.) Temp Table
+2.) Table Variable
+
+
+ -- there exists a thing called a global temp table, and 
+ -- is accessible to other databases, but he
+ -- has never used it, so not going to go over it
+
+Variable must start with @ symbol
+
+Temp Variables @
+
+-- declare variable
+DECLARE @Name VARCHAR(5)
+		
+-- setting variable
+SET @Name ='Andrew'
+
+or
+
+SELECT @Name = 'Andrew'
+
+ie
+
+DECLARE
+	@Name VARCHAR(50)
+	@Birthdate DATETIME
+SET @Name = 'Andrew'
+SET @Birthdate = '1/3/2004'
+
+ie
+
+DECLARE
+	@Name VARCHAR(50)
+	@Birthdate DATETIME
+
+SELECT 
+	@Name = 'Andrew'
+	@Birthdate = '1/3/2004'
+-- select with set mutliple variables
+
+ie
+DECLARE
+	@Name VARCHAR(50)
+	@Birthdate DATETIME
+
+SELECT 	
+	@Name = U.FirstName
+	@Birthdate = '1/3/2004'
+FROM [User] U
+WHERE U.UserID = 10
+
+Table Variables -- 
+
+ie
+DECLARE @MyTable TABLE
+(
+	UserID INT,
+	Name VARCHAR(120)
+)
+
+INSERT INTO @MyTable
+SELECT
+	U.UserID,
+	Name = U.LastName + ', ' + U.FirstName
+FROM [User] U
+
+SELECT * FROM @MyTable
+
+
+ie
+DECLARE @MyTable TABLE
+(
+	UserID INT,
+	Name VARCHAR(120),
+	ID INT
+)
+
+INSERT INTO @MyTable
+SELECT
+	U.UserID,
+	Name = U.LastName + ', ' + U.FirstName,
+	ID = 0
+FROM [User] U
+
+SELECT * FROM @MyTable
+
+
+Temp Table -- 
+
+CREATE TABLE #MyTable
+(
+	UserID INT,
+	Name VARCHAR(120)
+)
+
+INSERT INTO #MyTable
+SELECT
+	U.UserID,
+	Name = U.LastName + ', ' + U.FirstName
+FROM [User] U
+
+SELECT * FROM #MyTable
+
+DROP TABLE #MyTable
+
+
+Table Variable vs #MyTable
+
+Temp Table needs to be dropped. It stays alive for session, which is as 
+long as it is connected.
+
+Stored procedures will have access to temp tables
+
+Temp variable is cleaned up, and is scope based
+
+For small amount of data, < 1000 rows table variables are fine
+Once you get larger use temp tables. 
+
+That is because a temp table can have a primary key and be indexed
+
+However, there is a religious discussion of which one to use.
+
+

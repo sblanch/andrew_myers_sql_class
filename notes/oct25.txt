@@ -1,0 +1,6 @@
+Query - All Users that Don't have a Weapon
+===========================================
+SELECT *
+  FROM USERS LEFT JOIN UsersWeapon
+  ON Users.AID = UsersWeapon
+  WHERE UsersWeapon.AID IS NULL

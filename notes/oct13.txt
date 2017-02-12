@@ -1,0 +1,108 @@
+Keyword - LIKE
+========================
+Very similar to regular expressions. He won't go over regular expressions in  this class.
+The % means any characters before or after
+%ma% means anything that contains ma
+
+_ means one character
+m_a
+
+^ wildcard. He can't remember
+
+[]
+ie
+Find all names that start with a,b, or c
+SELECT *
+  FROM [User]
+  WHERE
+    FirstName Like '[abc]%'
+
+
+ie
+SELECT *
+  FROM [User]
+  WHERE
+    UserID > 100 AND
+    UserID < 200 AND
+    FirstName  LIKE '%ma%'
+
+Keyword - BETWEEN
+=========================
+A way to get numbers between a min and max, inclusive with min and max
+ie
+SELECT *
+  FROM [User]
+  WHERE
+    UserID BETWEEN 100 and 200
+It is only used with numbers and dates.
+He says he never uses it. He doesn't like it because of the inclusivity
+of the min and max
+
+Keywords - IS NULL
+========================
+You have to spell it out, because Null has no memory allocation
+
+Keywords - IS NOT NULL
+========================
+You have to spell it out, because Null has no memory allocation
+
+Stack (Computer Stuff)
+=======================
+
+
+
+Heap (Computer Stuff)
+=======================
+
+
+INT
+=========================
+A whole number. Int inSQL does have a limit
+
+BIGINT
+=========================
+A whole number. Bigger than an INT in its limit
+
+DECIMAL
+=========================
+Numbers with decimals
+
+FLOAT
+==========================
+Numbers with decimcals
+
+BIT
+==========================
+0 or 1. Basically a boolean. Bits are used as flags. IsUpdated, HasUpdated, etc.
+
+DATE
+===========================
+Just a date, but no time.
+ie '10/13/2016'
+He says Date manipulation is difficult.
+
+DATETIME
+===========================
+Date with time.
+He says Date manipulation is difficult.
+
+GetDate()
+===========================
+Returns the local current datetime
+
+GetUTCDate()
+===========================
+Returns the UTC Date datetime. UTC is Greenwich time.
+
+ie '10/13/2016 12:12:12'
+
+VARCHAR
+===========================
+Stores any text. It uses the current ASCII table
+If you don't have to accomodate for different languages other than English, use VarChar
+
+NVARHCAR
+===========================
+Stores any text, including the extending ASCII table.
+Examples are Chinese characters, Japanese characters.
+

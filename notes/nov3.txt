@@ -1,0 +1,115 @@
+/*
+Aggregated Functions -
+	AVG
+	COUNT
+	FIRST
+	LAST
+	MAX
+	MIN
+	SUM
+GROUP BY
+HAVING
+CAST
+CONCATENATION
+*/
+
+
+Key Word - Average Score
+=======================
+
+ie
+SELECT 
+	[Total Average Score] = AVG(q.Score) 
+FROM Qual q
+
+ie
+SELECT 
+	AVG(q.Score) AS [Total Average Score]
+FROM Qual q
+
+ie 
+-- Wrong
+SELECT
+	U.UserID
+	[Total Average Score] = AVG(q.Score)
+From Qual q
+INNER JOIN UserToQual uq on q.QualID = uq.QualID
+INNER JOIN [User] u on u.UserID = uq.UserID
+
+ie
+-- Correct
+SELECT
+	u.UserID,
+	[Total Average Score] = AVG(q.Score)
+From Qual q
+INNER JOIN UserToQual uq on q.QualID = uq.QualID
+INNER JOIN [User] u on u.UserID = uq.UserID
+GROUP BY u.UserID
+
+ie
+SELECT
+	u.UserID,
+	[Total Average Score] = AVG(q.Score)
+From Qual q
+INNER JOIN UserToQual uq on q.QualID = uq.QualID
+INNER JOIN [User] u on u.UserID = uq.UserID
+GROUP BY u.UserID
+HAVING AVG(q.Score) > 50 AND AVG(q.Score) < 70
+
+The Group By and Having come after the Where clause
+
+ie
+SELECT
+	u.UserID,
+	[Total Average Score] = AVG(q.Score)
+From Qual q
+INNER JOIN UserToQual uq on q.QualID = uq.QualID
+INNER JOIN [User] u on u.UserID = uq.UserID
+WHERE 
+	u.UserID > 10 and u.UserID < 100
+GROUP BY u.UserID
+HAVING AVG(q.Score) > 50 AND AVG(q.Score) < 70
+
+Key Word - Having
+======================
+WHERE clause but for GROUP BY
+
+Key Word - Concatenationan, CAST, CONVERT
+==============================
+
+wrong
+ie
+SELECT
+	u.UserID,
+	[Total Average Score] = AVG(q.Score) + 'pts'
+From Qual q
+INNER JOIN UserToQual uq on q.QualID = uq.QualID
+INNER JOIN [User] u on u.UserID = uq.UserID
+WHERE 
+	u.UserID > 10 and u.UserID < 100
+GROUP BY u.UserID
+HAVING AVG(q.Score) > 50 AND AVG(q.Score) < 70
+
+ie
+SELECT
+	u.UserID,
+	[Total Average Score] = CAST(AVG(q.Score) AS VARCHAR(4)) + 'pts'
+From Qual q
+INNER JOIN UserToQual uq on q.QualID = uq.QualID
+INNER JOIN [User] u on u.UserID = uq.UserID
+WHERE 
+	u.UserID > 10 and u.UserID < 100
+GROUP BY u.UserID
+HAVING AVG(q.Score) > 50 AND AVG(q.Score) < 70
+
+ie
+SELECT
+	u.UserID,
+	[Total Average Score] = CONVERT(VARCHAR(4), AVG(q.Score)) + 'pts'
+From Qual q
+INNER JOIN UserToQual uq on q.QualID = uq.QualID
+INNER JOIN [User] u on u.UserID = uq.UserID
+WHERE 
+	u.UserID > 10 and u.UserID < 100
+GROUP BY u.UserID
+HAVING AVG(q.Score) > 50 AND AVG(q.Score) < 70
